@@ -13,3 +13,9 @@ My own personal local Music stack.
 - [feishin](https://github.com/jeffvli/feishin) - A Navidrome frontend client
 - [ratune](https://github.com/acmagn/ratune) - A TUI Media Player
 - [Navic](https://navic.app/) - An android frontend client
+
+## TODO
+
+- Fix music meta data by downloding as much of the songs on ytdl-sub. (youtube_music_playlist_downloader messes up the playlist album meta data)
+
+- Get spotify downloader running
