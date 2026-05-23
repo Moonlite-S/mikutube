@@ -1,10 +1,6 @@
 #!/bin/sh
-# Note: deliberately NOT using `set -e` — we want the loop to keep going
-# even if individual commands hiccup.
-
 SYNC_INTERVAL="${SYNC_INTERVAL:-3600}"
 
-# Catch signals cleanly so logs make sense on stop/restart
 trap 'echo "[$(date -Iseconds)] Received signal, exiting loop"; exit 0' INT TERM
 
 echo "[$(date -Iseconds)] sync-all.sh starting, interval=${SYNC_INTERVAL}s"
@@ -17,7 +13,7 @@ while true; do
     if [ -f "${dir}.playlist_config.json" ]; then
       found_any=1
       echo "[$(date -Iseconds)] >> Syncing: $dir"
-      ( cd "$dir" && python /app/youtube_music_playlist_downloader.py )
+      ( cd "$dir" && python /app/run-sync.py )
       echo "[$(date -Iseconds)] >> Finished (exit $?): $dir"
     fi
   done

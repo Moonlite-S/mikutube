@@ -9,6 +9,7 @@ WORKDIR /app
 RUN git clone https://github.com/onnowhere/youtube_music_playlist_downloader.git . && \
   pip install --no-cache-dir -r requirements.txt
 
+COPY run-sync.py /app/run-sync.py
 COPY sync-all.sh /usr/local/bin/sync-all.sh
 RUN chmod +x /usr/local/bin/sync-all.sh
 
