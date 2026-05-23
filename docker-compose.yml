@@ -19,3 +19,31 @@ services:
       - "/mnt/storage/media/music:/music"
       # Optional: mount a cookies file if you ever add private playlists
       # - "/home/sean/stack/cookies.txt:/cookies.txt:ro"
+  
+    ytdl-sub:
+        image: ghcr.io/jmbannon/ytdl-sub-gui:latest
+        container_name: ytdl-sub
+        restart: unless-stopped
+        environment:
+          - TZ=America/Chicago
+          - PUID=1000
+          - PGID=1000
+        volumes:
+          - /mnt/storage/media/music:/music  
+        ports:
+
+    feishin:
+        container_name: feishin
+        image: 'ghcr.io/jeffvli/feishin:latest'
+        restart: unless-stopped
+        environment:
+            - SERVER_NAME=mikutube # pre-defined server name
+            - SERVER_LOCK=true # When true AND name/type/url are set, only username/password can be toggled
+            - SERVER_TYPE=navidrome # the allowed types are: jellyfin, navidrome, subsonic. These values are case insensitive
+            - SERVER_URL="http://192.168.50.62:4533" # http://address:port or https://address:port
+            - REMOTE_URL="https://navidrome.mikumyaa.me" # http://address or https://address
+            - LEGACY_AUTHENTICATION=false # When SERVER_LOCK is true, sets the legacy (plaintext) authentication flag for Subsonic/OpenSubsonic servers
+            - ANALYTICS_DISABLED=true # Set to true to disable Umami analytics tracking
+        ports:
+            - 9180:9180
+            # Alternatively, to restrict to only localhost, - 127.0.0.1:9180:8190        - 8443:8443
