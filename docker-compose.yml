@@ -12,7 +12,7 @@ services:
   yt_playlist_downloader:
     build: ./downloader
     user: "1000:1000"
-    restart: unless-stopped
+    restart: on-failure
     environment:
       - SYNC_INTERVAL=3600   # seconds between sync runs (1 hour)
     volumes:
