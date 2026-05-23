@@ -7,7 +7,7 @@ while true; do
   for dir in /music/*/; do
     if [ -f "${dir}.playlist_config.json" ]; then
       echo ">> Syncing: $dir"
-      ( cd "$dir" && python /app/youtube_music_playlist_downloader.py ) || \
+      ( cd "$dir" && yes "" | python /app/youtube_music_playlist_downloader.py ) || \
         echo "!! Failed: $dir (continuing)"
     fi
   done
